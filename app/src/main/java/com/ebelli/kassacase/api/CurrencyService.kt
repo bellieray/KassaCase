@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CurrencyService {
-    @GET("/")
+    @GET(".")
     suspend fun getCurrencies(
         @Query("apikey") apikey: String = API_KEY,
         @Query("currencies") currencies: String = SELECTED_CURRENCIES

@@ -4,4 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Anasayfa</string>
     <string name="past_transactions">Geçmiş İşlemler</string>
+    <string name="anonim_user_text">Merhaba, Onur Çağlar!</string>
+    <string name="currency_names">Para Birimleri</string>
+    <string name="add_to_balance">Para Ekle</string>
+    <string name="try_with_value">%.2f ₺</string>
+    <string name="purchase_title">%s / TL Satın Alma</string>
+    <string name="purchase_currency_with_title">Satın almak istediğiniz %s</string>
+    <string name="total_price">Toplam Maliyet</string>
+    <string name="purchase">Satın Al</string>
 </resources>

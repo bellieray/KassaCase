@@ -1,4 +1,4 @@
-package com.ebelli.kassacase.ui
+package com.ebelli.kassacase.ui.transaction
 
 import android.os.Bundle
 import android.view.LayoutInflater

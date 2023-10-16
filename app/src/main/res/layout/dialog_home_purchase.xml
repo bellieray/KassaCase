@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="currency"
+            type="com.ebelli.kassacase.model.Currency" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_two_with_top_radius_15dp"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/v_anchor"
+                android:layout_width="60dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="#b1bacc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sheet_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@{@string/purchase_title(currency.name)}"
+                android:textColor="@color/black"
+                app:fontFamily="@font/inter_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_anchor"
+                tools:text="Dolar/TL Satın Alma" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_currency"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sheet_title"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@{@string/try_with_value(currency.newBalance)}"
+                android:textColor="@android:color/black"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_currency"
+                tools:text="578,00 TL" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_currency_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@{@string/purchase_currency_with_title(currency.name)}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_current_price"
+                tools:text="Satın almak istediğiniz Dolar" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_purchase_qty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_light_gray_with_radius_10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_current_currency_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_balance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/total_price"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_purchase_qty" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_purchase_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_light_gray_with_radius_10dp"
+                android:gravity="center"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_current_balance_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_purchase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_black_with_radius_10dp"
+                android:gravity="center"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="20dp"
+                android:text="@string/purchase"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:fontFamily="@font/inter_regular"
+                app:layout_constraintTop_toBottomOf="@id/tv_purchase_balance" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
