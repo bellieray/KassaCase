@@ -15,12 +15,11 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_light_gray_with_radius_10dp"
             android:paddingHorizontal="15dp"
             android:paddingVertical="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -85,7 +84,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
-                android:text="@{String.valueOf(transaction.purchasedQty)}"
+                android:text="@{@string/try_with_value(transaction.purchasedQty)}"
                 android:textColor="@color/purple_700"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"

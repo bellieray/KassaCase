@@ -11,11 +11,17 @@ import com.ebelli.kassacase.model.TransactionEntity
 class TransactionAdapter() :
     ListAdapter<TransactionEntity, RecyclerView.ViewHolder>(HomeCurrencyDiffCallback) {
     object HomeCurrencyDiffCallback : DiffUtil.ItemCallback<TransactionEntity>() {
-        override fun areItemsTheSame(oldItem: TransactionEntity, newItem: TransactionEntity): Boolean {
+        override fun areItemsTheSame(
+            oldItem: TransactionEntity,
+            newItem: TransactionEntity
+        ): Boolean {
             return oldItem.currency.balance == newItem.currency.balance
         }
 
-        override fun areContentsTheSame(oldItem: TransactionEntity, newItem: TransactionEntity): Boolean {
+        override fun areContentsTheSame(
+            oldItem: TransactionEntity,
+            newItem: TransactionEntity
+        ): Boolean {
             return oldItem.purchasedQty == newItem.purchasedQty && oldItem.currency.balance == newItem.currency.balance
         }
 
@@ -24,7 +30,7 @@ class TransactionAdapter() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return HomeTransactionViewHolder(
             RowTransactionBinding.inflate(
-                LayoutInflater.from(parent.context)
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }

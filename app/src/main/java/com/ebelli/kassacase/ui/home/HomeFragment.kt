@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.ebelli.kassacase.R
 import com.ebelli.kassacase.databinding.FragmentHomeBinding
 import com.ebelli.kassacase.model.Currency
@@ -85,6 +86,10 @@ class HomeFragment : Fragment() {
         tvAddToBalance.setOnClickListener {
             homeViewModel.updateCurrentBalance(false)
         }
+
+        tvPastTransactions.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
+        }
     }
 
     private fun comparePrice(totalPurchase: Double, currency: Currency) {
@@ -93,7 +98,7 @@ class HomeFragment : Fragment() {
                 homeViewModel.updateCurrentBalance(true, totalPurchase)
                 homeViewModel.addTransactionToDb(currency.toTransaction(totalPurchase))
             } ?: kotlin.run {
-            Toast.makeText(requireContext(), "Yetersiz Bakiye", Toast.LENGTH_LONG).show()
+            notify("Yetersiz Bakiye")
         }
     }
 
@@ -102,7 +107,7 @@ class HomeFragment : Fragment() {
         dialog.show(childFragmentManager, HomePurchaseDialog::class.java.simpleName)
     }
 
-    private fun notify(text: String){
+    private fun notify(text: String) {
         Toast.makeText(
             requireContext(),
             text,

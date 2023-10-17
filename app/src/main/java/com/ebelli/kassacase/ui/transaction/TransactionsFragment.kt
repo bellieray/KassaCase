@@ -42,10 +42,11 @@ class TransactionsFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 transactionViewModel.transactionViewState.collect { viewState ->
-                    viewState.transactionEntities?.let { safeTransactions ->
-                        transactionAdapter.submitList(safeTransactions)
-                        binding.isEmpty = false
-                    } ?: kotlin.run {
+                    viewState.transactionEntities?.takeIf { it.isEmpty().not() }
+                        ?.let { safeTransactions ->
+                            transactionAdapter.submitList(safeTransactions)
+                            binding.isEmpty = false
+                        } ?: kotlin.run {
                         binding.isEmpty = true
                     }
 

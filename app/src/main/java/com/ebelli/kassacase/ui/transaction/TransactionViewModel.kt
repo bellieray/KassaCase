@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TransactionViewModel @Inject constructor(val currencyRepository: CurrencyRepository) :
+class TransactionViewModel @Inject constructor(private val currencyRepository: CurrencyRepository) :
     ViewModel() {
     private val _transactionViewState = MutableStateFlow(TransactionViewState())
     val transactionViewState = _transactionViewState.asStateFlow()

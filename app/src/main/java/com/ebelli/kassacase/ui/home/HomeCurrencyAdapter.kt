@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebelli.kassacase.databinding.RowHomeCurrencyBinding
 import com.ebelli.kassacase.model.Currency
 
-class HomeCurrencyAdapter(val onItemClicked : (Currency) -> Unit) :
+class HomeCurrencyAdapter(val onItemClicked: (Currency) -> Unit) :
     ListAdapter<Currency, RecyclerView.ViewHolder>(HomeCurrencyDiffCallback) {
     object HomeCurrencyDiffCallback : DiffUtil.ItemCallback<Currency>() {
         override fun areItemsTheSame(oldItem: Currency, newItem: Currency): Boolean {
@@ -22,7 +22,13 @@ class HomeCurrencyAdapter(val onItemClicked : (Currency) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return HomeCurrencyViewHolder(RowHomeCurrencyBinding.inflate(LayoutInflater.from(parent.context)))
+        return HomeCurrencyViewHolder(
+            RowHomeCurrencyBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
