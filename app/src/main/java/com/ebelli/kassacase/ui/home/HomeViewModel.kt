@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ebelli.kassacase.data.preferences.Prefs
 import com.ebelli.kassacase.data.repository.CurrencyRepository
 import com.ebelli.kassacase.model.Currency
+import com.ebelli.kassacase.model.TransactionEntity
 import com.ebelli.kassacase.utils.CURRENT_BALANCE
 import com.ebelli.kassacase.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,15 +42,27 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun addTransactionToDb(transactionEntity: TransactionEntity) {
+        viewModelScope.launch {
+            when (repository.insertTransactionToDb(transactionEntity)) {
+                is NetworkResult.Success -> {
+                    _homeViewState.update { it.copy(viewEvents = addEventToList(HomeViewEvent.TransactionSaved)) }
+                }
+                is NetworkResult.Failed -> {}
+            }
+        }
+    }
+
     fun updateCurrentBalance(isShouldBeDecreasing: Boolean, value: Double = STATIC_ADDING_BALANCE) {
         val currentBalance = _homeViewState.value.currentBalance
         viewModelScope.launch {
             if (currentBalance != null) {
-                if (isShouldBeDecreasing)
+                if (isShouldBeDecreasing) {
                     prefs.setSharedDouble(
                         CURRENT_BALANCE,
                         currentBalance - value
-                    ) else prefs.setSharedDouble(CURRENT_BALANCE, currentBalance + value)
+                    )
+                } else prefs.setSharedDouble(CURRENT_BALANCE, currentBalance + value)
             }
         }
         _homeViewState.update { it.copy(viewEvents = addEventToList(HomeViewEvent.BalanceUpdated)) }
@@ -77,13 +90,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun addEventToList(viewEvent: HomeViewEvent): List<HomeViewEvent> {
+    private fun addEventToList(viewEvent: HomeViewEvent): List<HomeViewEvent> {
         val eventList = _homeViewState.value.viewEvents?.toMutableList() ?: mutableListOf()
         eventList.add(viewEvent)
         return eventList
     }
 
-    fun eventConsumed(viewEvent: HomeViewEvent.BalanceUpdated) {
+    fun eventConsumed(viewEvent: HomeViewEvent) {
         _homeViewState.update { currentUiState ->
             val newViewEventList =
                 currentUiState.viewEvents?.filterNot { it == viewEvent } ?: mutableListOf()
@@ -101,4 +114,5 @@ data class HomeViewState(
 
 sealed class HomeViewEvent {
     object BalanceUpdated : HomeViewEvent()
+    object TransactionSaved : HomeViewEvent()
 }

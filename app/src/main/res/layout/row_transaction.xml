@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="transaction"
+            type="com.ebelli.kassacase.model.TransactionEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_light_gray_with_radius_10dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_currency"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_currency_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@{@string/currency_purchase(transaction.currency.name)}"
+                android:textColor="@color/black"
+                app:fontFamily="@font/inter_regular"
+                app:layout_constraintStart_toEndOf="@id/iv_currency"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Dollar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_currency_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@{@string/purchased_price(transaction.currency.newBalance)}"
+                android:textColor="@color/purple_700"
+                app:fontFamily="@font/inter_regular"
+                app:layout_constraintStart_toEndOf="@id/iv_currency"
+                app:layout_constraintTop_toBottomOf="@+id/tv_currency_name"
+                tools:text="Alınan Fiyat" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@{transaction.purchaseDate}"
+                android:textColor="@color/purple_700"
+                app:fontFamily="@font/inter_regular"
+                app:layout_constraintStart_toEndOf="@id/iv_currency"
+                app:layout_constraintTop_toBottomOf="@+id/tv_currency_price"
+                tools:text="02.06.200" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_0_70"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.70" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@{String.valueOf(transaction.purchasedQty)}"
+                android:textColor="@color/purple_700"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline_0_70"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="245,00" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

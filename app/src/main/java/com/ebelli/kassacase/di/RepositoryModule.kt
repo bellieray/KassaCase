@@ -1,5 +1,6 @@
 package com.ebelli.kassacase.di
 
+import com.ebelli.kassacase.data.datasource.local.CurrencyLocalDataSource
 import com.ebelli.kassacase.data.datasource.remote.CurrencyRemoteDataSource
 import com.ebelli.kassacase.data.repository.CurrencyRepository
 import com.ebelli.kassacase.data.repository.CurrencyRepositoryImpl
@@ -15,7 +16,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideCurrencyRepository(
-        currencyRemoteDataSource: CurrencyRemoteDataSource
+        currencyRemoteDataSource: CurrencyRemoteDataSource,
+        currencyLocalDataSource: CurrencyLocalDataSource
     ): CurrencyRepository =
-        CurrencyRepositoryImpl(currencyRemoteDataSource)
+        CurrencyRepositoryImpl(currencyRemoteDataSource, currencyLocalDataSource)
 }

@@ -1,6 +1,7 @@
 package com.ebelli.kassacase.model
 
 import com.ebelli.kassacase.R
+import com.ebelli.kassacase.utils.getCurrentDate
 
 private const val TRY_PRICE = 27.71F
 
@@ -27,4 +28,12 @@ data class Currency(val name: String?, val balance: Double?) {
             "USD" -> R.drawable.ic_dolar
             else -> R.drawable.ic_europe
         }
+
+    fun toTransaction(totalPurchase: Double): TransactionEntity {
+        return TransactionEntity(
+            currency = this,
+            purchaseDate = getCurrentDate(),
+            purchasedQty = totalPurchase
+        )
+    }
 }

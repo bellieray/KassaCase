@@ -12,4 +12,7 @@
     <string name="purchase_currency_with_title">Satın almak istediğiniz %s</string>
     <string name="total_price">Toplam Maliyet</string>
     <string name="purchase">Satın Al</string>
+    <string name="currency_purchase">%s Satın Alım</string>
+    <string name="purchased_price">Alınan Fiyat : %.2f</string>
+    <string name="no_transaction">Henüz bir işlemin bulunmuyor.</string>
 </resources>

@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class HomePurchaseDialog(
     val currency: Currency,
-    val onPurchaseClicked: (totalPurchase: Double) -> Unit
+    private val onPurchaseClicked: (totalPurchase: Double, currency: Currency) -> Unit
 ) : BottomSheetDialogFragment() {
     private var _binding: DialogHomePurchaseBinding? = null
     private val binding get() = _binding!!
@@ -54,7 +54,7 @@ class HomePurchaseDialog(
         binding.tvPurchase.setOnClickListener {
             dialog?.dismiss()
             tvPurchaseBalance.text.toString().takeIf { it.isBlank().not() }?.let { value ->
-                onPurchaseClicked.invoke(value.replace(',', '.').toDouble())
+                onPurchaseClicked.invoke(value.replace(',', '.').toDouble(), this@HomePurchaseDialog.currency)
             }
         }
         currency = this@HomePurchaseDialog.currency

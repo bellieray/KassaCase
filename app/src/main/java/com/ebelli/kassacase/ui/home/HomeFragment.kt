@@ -57,13 +57,12 @@ class HomeFragment : Fragment() {
                     viewState.viewEvents?.firstOrNull()?.let { homeViewEvent ->
                         when (homeViewEvent) {
                             is HomeViewEvent.BalanceUpdated -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Cüzdan Güncellendi",
-                                    Toast.LENGTH_LONG
-                                ).show()
-
+                                notify("Cüzdan Güncellendi")
                                 homeViewModel.getCurrentBalance()
+                            }
+
+                            is HomeViewEvent.TransactionSaved -> {
+                                notify("İşlem kaydedildi.")
                             }
                         }
                         homeViewModel.eventConsumed(homeViewEvent)
@@ -88,10 +87,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun comparePrice(totalPurchase: Double) {
+    private fun comparePrice(totalPurchase: Double, currency: Currency) {
         homeViewModel.homeViewState.value.currentBalance.takeIf { it != null && it > 0 && it >= totalPurchase }
             ?.let {
                 homeViewModel.updateCurrentBalance(true, totalPurchase)
+                homeViewModel.addTransactionToDb(currency.toTransaction(totalPurchase))
             } ?: kotlin.run {
             Toast.makeText(requireContext(), "Yetersiz Bakiye", Toast.LENGTH_LONG).show()
         }
@@ -100,6 +100,14 @@ class HomeFragment : Fragment() {
     private fun showPurchaseDialog(currency: Currency) {
         val dialog = HomePurchaseDialog(currency, ::comparePrice)
         dialog.show(childFragmentManager, HomePurchaseDialog::class.java.simpleName)
+    }
+
+    private fun notify(text: String){
+        Toast.makeText(
+            requireContext(),
+            text,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onDestroyView() {
